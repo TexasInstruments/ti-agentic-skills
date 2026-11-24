@@ -6,5 +6,81 @@
   "metadata": {
     "description": "Agent Skills for Texas Instruments products and software."
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "ti-linux-sdk-skills",
+      "description": "Skills for the TI Processor SDK Linux on Sitara MPUs: SDK setup, kernel and U-Boot builds, Yocto, device tree, boot flow, deployment and diagnostics.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ti-linux-sdk-skills/ti-linux-boot-chain",
+        "./skills/ti-linux-sdk-skills/ti-linux-build-source",
+        "./skills/ti-linux-sdk-skills/ti-linux-custom-board-port",
+        "./skills/ti-linux-sdk-skills/ti-linux-customize-clocks",
+        "./skills/ti-linux-sdk-skills/ti-linux-deploy-image",
+        "./skills/ti-linux-sdk-skills/ti-linux-device-tree-overlay",
+        "./skills/ti-linux-sdk-skills/ti-linux-diagnostic",
+        "./skills/ti-linux-sdk-skills/ti-linux-generate-kb",
+        "./skills/ti-linux-sdk-skills/ti-linux-gpio-pinmux",
+        "./skills/ti-linux-sdk-skills/ti-linux-kernel-module",
+        "./skills/ti-linux-sdk-skills/ti-linux-pru",
+        "./skills/ti-linux-sdk-skills/ti-linux-remoteproc",
+        "./skills/ti-linux-sdk-skills/ti-linux-resource-partition",
+        "./skills/ti-linux-sdk-skills/ti-linux-sdk-quick-start",
+        "./skills/ti-linux-sdk-skills/ti-linux-sdk-setup",
+        "./skills/ti-linux-sdk-skills/ti-linux-serial-console",
+        "./skills/ti-linux-sdk-skills/ti-linux-yocto-build",
+        "./skills/ti-linux-sdk-skills/ti-linux-yocto-custom-dt"
+      ]
+    },
+    {
+      "name": "ti-linux-sdk-skills-bringup",
+      "description": "First boot: SDK setup, build, flash, serial console, boot chain",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ti-linux-sdk-skills/ti-linux-sdk-quick-start",
+        "./skills/ti-linux-sdk-skills/ti-linux-sdk-setup",
+        "./skills/ti-linux-sdk-skills/ti-linux-build-source",
+        "./skills/ti-linux-sdk-skills/ti-linux-deploy-image",
+        "./skills/ti-linux-sdk-skills/ti-linux-serial-console",
+        "./skills/ti-linux-sdk-skills/ti-linux-boot-chain",
+        "./skills/ti-linux-sdk-skills/ti-linux-diagnostic"
+      ]
+    },
+    {
+      "name": "ti-linux-sdk-skills-kernel-dt",
+      "description": "Kernel modules and device tree work",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ti-linux-sdk-skills/ti-linux-kernel-module",
+        "./skills/ti-linux-sdk-skills/ti-linux-device-tree-overlay",
+        "./skills/ti-linux-sdk-skills/ti-linux-gpio-pinmux",
+        "./skills/ti-linux-sdk-skills/ti-linux-customize-clocks",
+        "./skills/ti-linux-sdk-skills/ti-linux-custom-board-port"
+      ]
+    },
+    {
+      "name": "ti-linux-sdk-skills-yocto",
+      "description": "Yocto builds and device tree in Yocto",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ti-linux-sdk-skills/ti-linux-yocto-build",
+        "./skills/ti-linux-sdk-skills/ti-linux-yocto-custom-dt"
+      ]
+    },
+    {
+      "name": "ti-linux-sdk-skills-remote-cores",
+      "description": "Remote processors, PRU and K3 resource partitioning",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ti-linux-sdk-skills/ti-linux-remoteproc",
+        "./skills/ti-linux-sdk-skills/ti-linux-pru",
+        "./skills/ti-linux-sdk-skills/ti-linux-resource-partition"
+      ]
+    }
+  ]
 }

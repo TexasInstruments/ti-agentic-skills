@@ -2,13 +2,13 @@
 
 Agent Skills for Texas Instruments products and software. Install them into a coding agent
 (Claude Code, Codex, Cursor and others that support the [Agent Skills](https://agentskills.io)
-format) to run TI-specific workflows: SDK setup, builds, bring-up, debug and deployment.
+format; the plugin marketplace manifest is Claude Code only for now) to run TI-specific workflows: SDK setup, builds, bring-up, debug and deployment.
 
 One repository for all of TI. Each business unit owns a group folder under `skills/`.
 
 | Group | Folder | Status |
 |---|---|---|
-| Linux SDK (Sitara MPU) | `skills/ti-linux-sdk-skills/` | in progress |
+| Linux SDK (Sitara MPU) | `skills/ti-linux-sdk-skills/` | active (18 skills) |
 | MCU+ SDK | `skills/ti-mcu-plus-sdk-skills/` | planned |
 
 The generated [catalog](docs/CATALOG.md) lists every skill.
@@ -50,7 +50,7 @@ See [docs/install.md](docs/install.md).
 skills/<group>/<skill>/SKILL.md   the skills (self-contained: scripts/, references/, assets/)
 shared/<group>/                   sources of files vendored into several skills
 registry/<group>.yml              group metadata, owners, bundles, shared-file map
-mcp/                              MCP servers the skills use
+mcp/<server>/                     MCP servers the skills call (Linux skills use mcp/processor-sdk-docs)
 tools/                            validate, build, sync_shared, install
 docs/                             spec, install, governance helpers
 ```

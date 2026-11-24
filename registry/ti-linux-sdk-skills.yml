@@ -5,7 +5,79 @@ description: >
   Yocto, device tree, boot flow, deployment and diagnostics.
 owners:
   - "@TexasInstruments/ti-linux-sdk-skills-maintainers"
-status: planned
+status: active
 license: BSD-3-Clause
-bundles: {}
-shared: {}
+bundles:
+  bringup:
+    description: "First boot: SDK setup, build, flash, serial console, boot chain"
+    skills: [ti-linux-sdk-quick-start, ti-linux-sdk-setup, ti-linux-build-source, ti-linux-deploy-image, ti-linux-serial-console, ti-linux-boot-chain, ti-linux-diagnostic]
+  kernel-dt:
+    description: "Kernel modules and device tree work"
+    skills: [ti-linux-kernel-module, ti-linux-device-tree-overlay, ti-linux-gpio-pinmux, ti-linux-customize-clocks, ti-linux-custom-board-port]
+  yocto:
+    description: "Yocto builds and device tree in Yocto"
+    skills: [ti-linux-yocto-build, ti-linux-yocto-custom-dt]
+  remote-cores:
+    description: "Remote processors, PRU and K3 resource partitioning"
+    skills: [ti-linux-remoteproc, ti-linux-pru, ti-linux-resource-partition]
+shared:
+  ti-linux-boot-chain:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-build-source:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-custom-board-port:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: build-dtbo.sh, dest: scripts/build-dtbo.sh}
+  ti-linux-customize-clocks:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: build-dtbo.sh, dest: scripts/build-dtbo.sh}
+  ti-linux-deploy-image:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-device-tree-overlay:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: build-dtbo.sh, dest: scripts/build-dtbo.sh}
+  ti-linux-diagnostic:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+  ti-linux-generate-kb:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: gen-sdk-facts.py, dest: scripts/gen-sdk-facts.py}
+  ti-linux-gpio-pinmux:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-kernel-module:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-pru:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: dt-cores.sh, dest: scripts/dt-cores.sh}
+  ti-linux-remoteproc:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: dt-cores.sh, dest: scripts/dt-cores.sh}
+  ti-linux-resource-partition:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-sdk-quick-start:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: target-profile.yaml, dest: assets/target-profile.yaml}
+  ti-linux-sdk-setup:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: target-profile.yaml, dest: assets/target-profile.yaml}
+  ti-linux-serial-console:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+  ti-linux-yocto-build:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+  ti-linux-yocto-custom-dt:
+    - {src: mcp-usage.md, dest: references/mcp-usage.md}
+    - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}

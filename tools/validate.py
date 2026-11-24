@@ -29,7 +29,7 @@ def err(msg):
 REQUIRED_REG = ("name", "group", "description", "owners", "status", "license")
 STATUSES = ("planned", "active", "deprecated")
 LINK_RE = re.compile(r"\]\(([^)\s#]+)")
-ESCAPE_RE = re.compile(r"(^|[\s\"'=(])((\.\./)+)[\w.-]")
+ESCAPE_RE = re.compile(r"(\.\./)+[\w.-]")
 
 
 def check_skill(group, skill, seen):

@@ -3,11 +3,37 @@
 
 ## Linux SDK
 
-`ti-linux-sdk-skills` - status: planned - license: BSD-3-Clause
+`ti-linux-sdk-skills` - status: active - license: BSD-3-Clause
 
 Skills for the TI Processor SDK Linux on Sitara MPUs: SDK setup, kernel and U-Boot builds, Yocto, device tree, boot flow, deployment and diagnostics.
 
-_No skills published yet._
+| Skill | Description |
+|---|---|
+| `ti-linux-boot-chain` | Explain, locate, rebuild and sanity-check the TI K3 boot binaries (tiboot3.bin, tispl.bin, u-boot.img, fitImage) and the device-manager (DM) firmware inside ... |
+| `ti-linux-build-source` | Build the Linux kernel, device tree blobs, and U-Boot boot binaries (R5/A-core or single-stage, depending on the SoC) from the SDK sources using the SDK top-... |
+| `ti-linux-custom-board-port` | Derive a custom board from a TI Processor SDK reference board: clone the kernel board DTS, the U-Boot R5 and A53 device trees and defconfigs, regenerate DDR/... |
+| `ti-linux-customize-clocks` | Inspect and change CPU frequency scaling (cpufreq sysfs, governors, the A53 OPP table in the kernel DTS) and set LPM resume-latency constraints (pm_qos_resum... |
+| `ti-linux-deploy-image` | Put built or prebuilt SDK images on a TI board - create an SD card with the SDK bin/create-sdcard.sh or the Makefile install targets (DESTDIR), copy boot fil... |
+| `ti-linux-device-tree-overlay` | Write, build, install and enable a device tree overlay (.dtso to .dtbo) for a TI K3 board running the Processor SDK Linux: build with the SDK kernel tree, te... |
+| `ti-linux-diagnostic` | Read-only health snapshot of a running TI K3 board (identity, kernel, memory, thermal, cpufreq, remoteproc, disks, failed units, dmesg errors) as JSON. Use t... |
+| `ti-linux-generate-kb` | Generate or refresh the per-platform knowledge base (cores and firmware names, reserved memory, OPPs, IOPAD macros, GPIO, overlays, boot files, component ver... |
+| `ti-linux-gpio-pinmux` | Configure and debug pin multiplexing and GPIO on a TI K3 Linux board: write pinctrl-single IOPAD entries in device tree, read live pad registers from debugfs... |
+| `ti-linux-kernel-module` | Cross-compile an out-of-tree Linux kernel module against the kernel tree shipped in a TI Processor SDK, check that it matches the kernel running on the board... |
+| `ti-linux-pru` | Build and run PRU (Programmable Real-time Unit, PRU-ICSS / ICSSG PRU, RTU, TX_PRU) firmware on a TI board from Linux: gate on PRU presence in the device tree... |
+| `ti-linux-remoteproc` | Discover, load, reload and verify firmware on the remote processors (R5F, M4F, ...) of a TI K3 or Sitara board through the Linux remoteproc and RPMsg interfa... |
+| `ti-linux-resource-partition` | Locate and understand the K3 Resource Partitioning tool shipped in the SDK (board-support/k3-respart-tool, SysConfig based) and its generated outputs (.syscf... |
+| `ti-linux-sdk-quick-start` | Entry point and router for TI Processor SDK Linux work. Gathers the few inputs every other skill needs (SDK path, board IP, boot medium, security mode) and s... |
+| `ti-linux-sdk-setup` | Install or locate a TI Processor SDK Linux tree, check the build host, load device values (SOC, PLATFORM, toolchain, U-Boot machines) from the SDK Rules.make... |
+| `ti-linux-serial-console` | Access the target board's serial console to capture boot logs (ROM, SPL, U-Boot, kernel) and interact with the bootloader. Use when the board has no network,... |
+| `ti-linux-yocto-build` | Set up and run the TI Processor SDK Yocto (Arago / OpenEmbedded) build on a Linux host with oe-layersetup and bitbake: check host prerequisites, pick the lay... |
+| `ti-linux-yocto-custom-dt` | Carry a custom device tree or overlay from the Processor SDK kernel tree into a Yocto (Arago/oe-layersetup) image build of the same SDK. Use after the DTS wo... |
+
+Bundles:
+
+- `ti-linux-sdk-skills-bringup`: First boot: SDK setup, build, flash, serial console, boot chain (ti-linux-sdk-quick-start, ti-linux-sdk-setup, ti-linux-build-source, ti-linux-deploy-image, ti-linux-serial-console, ti-linux-boot-chain, ti-linux-diagnostic)
+- `ti-linux-sdk-skills-kernel-dt`: Kernel modules and device tree work (ti-linux-kernel-module, ti-linux-device-tree-overlay, ti-linux-gpio-pinmux, ti-linux-customize-clocks, ti-linux-custom-board-port)
+- `ti-linux-sdk-skills-yocto`: Yocto builds and device tree in Yocto (ti-linux-yocto-build, ti-linux-yocto-custom-dt)
+- `ti-linux-sdk-skills-remote-cores`: Remote processors, PRU and K3 resource partitioning (ti-linux-remoteproc, ti-linux-pru, ti-linux-resource-partition)
 
 ## MCU+ SDK
 
