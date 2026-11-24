@@ -1,0 +1,27 @@
+name: release
+# Tag a group release as <group>/vX.Y.Z, for example ti-linux-sdk-skills/v1.0.0.
+on:
+  push:
+    tags:
+      - "ti-*-skills/v*"
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml
+      - run: python3 tools/sync_shared.py --check && python3 tools/build.py --check && python3 tools/validate.py
+      - name: Package group
+        run: |
+          group="${GITHUB_REF_NAME%%/*}"
+          test -d "skills/$group"
+          tar -czf "${GITHUB_REF_NAME//\//-}.tar.gz" "skills/$group" "registry/$group.yml" LICENSE
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: "*.tar.gz"
+          generate_release_notes: true

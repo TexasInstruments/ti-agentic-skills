@@ -1,0 +1,10 @@
+{
+  "name": "ti-agentic-skills",
+  "owner": {
+    "name": "Texas Instruments Incorporated"
+  },
+  "metadata": {
+    "description": "Agent Skills for Texas Instruments products and software."
+  },
+  "plugins": []
+}

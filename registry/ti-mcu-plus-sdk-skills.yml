@@ -1,0 +1,10 @@
+name: MCU+ SDK
+group: ti-mcu-plus-sdk-skills
+description: >
+  Skills for the TI MCU+ SDK on Sitara MCUs and Jacinto/AM6x real-time cores.
+owners:
+  - "@TexasInstruments/ti-mcu-plus-sdk-skills-maintainers"
+status: planned
+license: BSD-3-Clause
+bundles: {}
+shared: {}

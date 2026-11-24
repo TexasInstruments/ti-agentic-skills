@@ -1,0 +1,19 @@
+name: dco
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  dco:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check Signed-off-by on every commit
+        run: |
+          bad=0
+          for c in $(git rev-list --no-merges "origin/${{ github.base_ref }}..HEAD"); do
+            git show -s --format=%B "$c" | grep -qE '^Signed-off-by: .+ <.+>$' || { echo "missing sign-off: $c"; bad=1; }
+          done
+          exit $bad

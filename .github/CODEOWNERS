@@ -1,0 +1,16 @@
+# Last matching pattern wins. Teams must exist in the TexasInstruments org (see GOVERNANCE.md).
+*                                   @TexasInstruments/ti-agentic-skills-maintainers
+/.github/                           @TexasInstruments/ti-agentic-skills-maintainers
+/tools/                             @TexasInstruments/ti-agentic-skills-maintainers
+/registry/_template.yml             @TexasInstruments/ti-agentic-skills-maintainers
+
+# Linux SDK group
+/skills/ti-linux-sdk-skills/        @TexasInstruments/ti-linux-sdk-skills-maintainers
+/shared/ti-linux-sdk-skills/        @TexasInstruments/ti-linux-sdk-skills-maintainers
+/registry/ti-linux-sdk-skills.yml   @TexasInstruments/ti-linux-sdk-skills-maintainers
+/mcp/processor-sdk-docs/            @TexasInstruments/ti-linux-sdk-skills-maintainers
+
+# MCU+ SDK group
+/skills/ti-mcu-plus-sdk-skills/     @TexasInstruments/ti-mcu-plus-sdk-skills-maintainers
+/shared/ti-mcu-plus-sdk-skills/     @TexasInstruments/ti-mcu-plus-sdk-skills-maintainers
+/registry/ti-mcu-plus-sdk-skills.yml @TexasInstruments/ti-mcu-plus-sdk-skills-maintainers
