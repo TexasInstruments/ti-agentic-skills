@@ -14,7 +14,7 @@ set -euo pipefail
 
 usage() { sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'; exit "${1:-1}"; }
 
-emmc= part= dry=0
+emmc='' part='' dry=0
 images=()
 while [ $# -gt 0 ]; do
     case $1 in

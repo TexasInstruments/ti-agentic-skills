@@ -73,6 +73,7 @@ info()  { echo "[INFO] $*"; }
 run_search_stdio() {
     local query_json="$1"
     local tmpdir="$2"
+    # shellcheck disable=SC2034  # kept for call-site compatibility
     local server_path="$3"
     # Use a Python subprocess to communicate with the server over stdio
     local response

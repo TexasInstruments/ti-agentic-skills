@@ -36,7 +36,7 @@ for r in /sys/class/remoteproc/remoteproc*; do
 done
 
 disks=()
-while read -r fs size used avail pct mnt; do
+while read -r fs size _ avail pct mnt; do
   disks+=("{\"mount\":$(str "$mnt"),\"fs\":$(str "$fs"),\"size_kb\":$size,\"avail_kb\":$avail,\"use\":$(str "$pct")}")
 done < <(df -kP 2>/dev/null | awk 'NR>1 && $1 ~ /^\/dev\//')
 
