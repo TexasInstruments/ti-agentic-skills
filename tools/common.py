@@ -24,21 +24,21 @@ def load_yaml(path):
 
 
 def registries():
-    """Return {group: registry-dict} for every registry/<group>.yml (not _template)."""
+    """Return {category: registry-dict} for every registry/<category>.yml (not _template)."""
     out = {}
     if not os.path.isdir(REGISTRY_DIR):
         return out
     for fn in sorted(os.listdir(REGISTRY_DIR)):
         if fn.endswith(".yml") and not fn.startswith("_"):
             reg = load_yaml(os.path.join(REGISTRY_DIR, fn))
-            reg.setdefault("group", fn[:-4])
+            reg.setdefault("category", fn[:-4])
             reg["_file"] = fn
-            out[reg["group"]] = reg
+            out[reg["category"]] = reg
     return out
 
 
-def skills_in_group(group):
-    d = os.path.join(SKILLS_DIR, group)
+def skills_in_category(category):
+    d = os.path.join(SKILLS_DIR, category)
     if not os.path.isdir(d):
         return []
     return sorted(

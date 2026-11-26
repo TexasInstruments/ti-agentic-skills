@@ -1,17 +1,12 @@
-# Copy to registry/<group>.yml. One file per skill group (business unit / product area).
-name: Human Readable Group Name          # shown in the catalog
-group: ti-example-skills                 # must equal the file name and the skills/<group>/ folder
+# Copy to registry/<category>.yml. One file per skill category (one SDK or software stack).
+name: Human Readable Category Name          # shown in the catalog
+category: ti-example-skills                 # must equal the file name and the skills/<category>/ folder
 description: >
   One or two sentences: what these skills do and which products they cover.
 status: planned                          # planned | active | deprecated
 # Owners are not listed here: add your paths and GitHub usernames to .github/component-owners.yml.
 license: BSD-3-Clause
-# Optional: named subsets users can install as one Claude plugin.
-bundles:
-  starter:
-    description: "What this subset is for"
-    skills: []                           # skill names that exist under skills/<group>/
-# Optional: files vendored from shared/<group>/ into individual skills by tools/sync_shared.py.
+# Optional: files vendored from shared/<category>/ into individual skills by tools/sync_shared.py.
 shared: {}
 #  ti-example-build:
 #    - {src: env.sh, dest: scripts/env.sh}

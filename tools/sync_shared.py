@@ -3,9 +3,9 @@
 # Copyright (c) 2026 Texas Instruments Incorporated
 """Vendor shared files into skills so every skill folder is self-contained.
 
-Source of truth: shared/<group>/<src>
-Mapping:         registry/<group>.yml  ->  shared: {<skill>: [{src: ..., dest: ...}]}
-Result:          skills/<group>/<skill>/<dest> is a real copy (never a symlink).
+Source of truth: shared/<category>/<src>
+Mapping:         registry/<category>.yml  ->  shared: {<skill>: [{src: ..., dest: ...}]}
+Result:          skills/<category>/<skill>/<dest> is a real copy (never a symlink).
 
   sync_shared.py          write/refresh the copies
   sync_shared.py --check  exit 1 if any copy differs (used in CI)
@@ -21,11 +21,11 @@ from common import ROOT, SHARED_DIR, SKILLS_DIR, registries
 
 
 def pairs():
-    for group, reg in registries().items():
+    for category, reg in registries().items():
         for skill, items in (reg.get("shared") or {}).items():
             for it in items or []:
-                src = os.path.join(SHARED_DIR, group, it["src"])
-                dst = os.path.join(SKILLS_DIR, group, skill, it["dest"])
+                src = os.path.join(SHARED_DIR, category, it["src"])
+                dst = os.path.join(SKILLS_DIR, category, skill, it["dest"])
                 yield src, dst
 
 

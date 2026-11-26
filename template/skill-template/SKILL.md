@@ -5,7 +5,7 @@ description: >
   would actually type. Max 1024 characters.
 license: BSD-3-Clause
 metadata:
-  group: ti-example-skills
+  category: ti-example-skills
   version: "0.1.0"
 ---
 

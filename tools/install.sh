@@ -7,23 +7,23 @@ set -euo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: tools/install.sh [--group <group>] [--skill <name>]... [--dest <dir>] [--list]
+Usage: tools/install.sh [--category <category>] [--skill <name>]... [--dest <dir>] [--list]
 
-  --group <group>  install every skill in skills/<group>/
-  --skill <name>   install one skill (repeatable; may be combined with --group)
+  --category <category>  install every skill in skills/<category>/
+  --skill <name>   install one skill (repeatable; may be combined with --category)
   --dest <dir>     target skills directory (default: ./.claude/skills)
-  --list           list available groups and skills, then exit
+  --list           list available categories and skills, then exit
 
 Each skill is self-contained, so any selection installs cleanly.
 USAGE
 }
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-dest="./.claude/skills" group="" list=0
+dest="./.claude/skills" category="" list=0
 skills=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --group) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; group=$2; shift 2 ;;
+    --category) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; category=$2; shift 2 ;;
     --skill) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; skills+=("$2"); shift 2 ;;
     --dest)  [[ $# -ge 2 ]] || { usage >&2; exit 2; }; dest=$2; shift 2 ;;
     --list)  list=1; shift ;;
@@ -42,11 +42,11 @@ if [[ $list -eq 1 ]]; then
   exit 0
 fi
 
-[[ -n "$group" || ${#skills[@]} -gt 0 ]] || { echo "install.sh: nothing selected" >&2; usage >&2; exit 2; }
+[[ -n "$category" || ${#skills[@]} -gt 0 ]] || { echo "install.sh: nothing selected" >&2; usage >&2; exit 2; }
 
-if [[ -n "$group" ]]; then
-  [[ -d "$repo/skills/$group" ]] || { echo "install.sh: unknown group: $group" >&2; exit 1; }
-  for s in "$repo/skills/$group"/*/; do
+if [[ -n "$category" ]]; then
+  [[ -d "$repo/skills/$category" ]] || { echo "install.sh: unknown category: $category" >&2; exit 1; }
+  for s in "$repo/skills/$category"/*/; do
     [[ -f "$s/SKILL.md" ]] && skills+=("$(basename "$s")")
   done
 fi

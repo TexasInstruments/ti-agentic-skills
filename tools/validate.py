@@ -5,10 +5,9 @@
 
 Checks:
   * every registry parses and has required keys
-  * every skills/<group>/ has a registry; .github/component-owners.yml is valid and its paths exist
-  * skill: frontmatter, name == directory, name carries the group prefix,
+  * every skills/<category>/ has a registry; .github/component-owners.yml is valid and its paths exist
+  * skill: frontmatter, name == directory, name carries the category prefix,
     description <= 1024 chars, SKILL.md <= 500 lines, names unique repo-wide
-  * bundles reference existing skills
   * no markdown link or script path escapes the skill folder (self-contained rule)
   * registry `shared` maps point at real files (content drift: tools/sync_shared.py --check)
 """
@@ -17,7 +16,7 @@ import re
 import sys
 
 from common import (NAME_RE, load_yaml, ROOT, SKILLS_DIR, parse_frontmatter, registries,
-                    skills_in_group)
+                    skills_in_category)
 
 errors = []
 
@@ -26,14 +25,14 @@ def err(msg):
     errors.append(msg)
 
 
-REQUIRED_REG = ("name", "group", "description", "status", "license")
+REQUIRED_REG = ("name", "category", "description", "status", "license")
 STATUSES = ("planned", "active", "deprecated")
 LINK_RE = re.compile(r"\]\(([^)\s#]+)")
 ESCAPE_RE = re.compile(r"(\.\./)+[\w.-]")
 
 
-def check_skill(group, skill, seen):
-    sdir = os.path.join(SKILLS_DIR, group, skill)
+def check_skill(category, skill, seen):
+    sdir = os.path.join(SKILLS_DIR, category, skill)
     path = os.path.join(sdir, "SKILL.md")
     rel = os.path.relpath(path, ROOT)
     try:
@@ -45,7 +44,7 @@ def check_skill(group, skill, seen):
         err("%s: name %r must equal directory %r" % (rel, name, skill))
     if not isinstance(name, str) or not NAME_RE.match(name) or len(name) > 64:
         err("%s: name must be lowercase-hyphen, <= 64 chars" % rel)
-    prefix = group[:-len("-sdk-skills")] if group.endswith("-sdk-skills") else group[:-len("-skills")]
+    prefix = category[:-len("-sdk-skills")] if category.endswith("-sdk-skills") else category[:-len("-skills")]
     if not skill.startswith(prefix + "-"):
         err("%s: skill name must start with %r" % (rel, prefix + "-"))
     desc = fm.get("description")
@@ -114,42 +113,36 @@ def check_component_owners():
 def main():
     regs = registries()
     if not regs:
-        err("registry/: no group registries found")
+        err("registry/: no category registries found")
     seen = {}
     if not os.path.isfile(os.path.join(ROOT, ".github", "CODEOWNERS")):
         err(".github/CODEOWNERS missing")
     owned = check_component_owners()
 
-    for group, reg in regs.items():
+    for category, reg in regs.items():
         f = "registry/" + reg["_file"]
         for k in REQUIRED_REG:
             if not reg.get(k):
                 err("%s: missing key %r" % (f, k))
         if reg.get("status") not in STATUSES:
             err("%s: status must be one of %s" % (f, STATUSES))
-        if not group.startswith("ti-") or not group.endswith("-skills"):
-            err("%s: group must look like ti-<area>-skills" % f)
-        skills = skills_in_group(group)
-        if reg.get("status") == "active" and not any(p.startswith("skills/%s" % group) for p in owned):
-            print("validate: warning: %s is active but has no entry in .github/component-owners.yml" % group,
+        if not category.startswith("ti-") or not category.endswith("-skills"):
+            err("%s: category must look like ti-<area>-skills" % f)
+        skills = skills_in_category(category)
+        if reg.get("status") == "active" and not any(p.startswith("skills/%s" % category) for p in owned):
+            print("validate: warning: %s is active but has no entry in .github/component-owners.yml" % category,
                   file=sys.stderr)
         if reg.get("status") == "active" and not skills:
-            err("%s: status active but skills/%s/ has no skills" % (f, group))
+            err("%s: status active but skills/%s/ has no skills" % (f, category))
         for s in skills:
-            check_skill(group, s, seen)
-        for bname, b in (reg.get("bundles") or {}).items():
-            if not NAME_RE.match(bname):
-                err("%s: bundle name %r invalid" % (f, bname))
-            for s in (b or {}).get("skills", []):
-                if s not in skills:
-                    err("%s: bundle %r lists unknown skill %r" % (f, bname, s))
+            check_skill(category, s, seen)
         for skill, items in (reg.get("shared") or {}).items():
             if skill not in skills:
                 err("%s: shared lists unknown skill %r" % (f, skill))
             for it in items or []:
-                src = os.path.join(ROOT, "shared", group, it.get("src", ""))
+                src = os.path.join(ROOT, "shared", category, it.get("src", ""))
                 if not os.path.isfile(src):
-                    err("%s: shared src %r not found under shared/%s/" % (f, it.get("src"), group))
+                    err("%s: shared src %r not found under shared/%s/" % (f, it.get("src"), category))
                 if not it.get("dest"):
                     err("%s: shared item for %s lacks dest" % (f, skill))
 
@@ -163,8 +156,8 @@ def main():
         for e in errors:
             print("  " + e, file=sys.stderr)
         return 1
-    n = sum(len(skills_in_group(g)) for g in regs)
-    print("validate: OK (%d groups, %d skills)" % (len(regs), n))
+    n = sum(len(skills_in_category(g)) for g in regs)
+    print("validate: OK (%d %s, %d skills)" % (len(regs), "category" if len(regs) == 1 else "categories", n))
     return 0
 
 

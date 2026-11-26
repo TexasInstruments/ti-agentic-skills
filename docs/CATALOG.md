@@ -28,18 +28,3 @@ Skills for the TI Processor SDK Linux on Sitara MPUs: SDK setup, kernel and U-Bo
 | `ti-linux-yocto-build` | Set up and run the TI Processor SDK Yocto (Arago / OpenEmbedded) build on a Linux host with oe-layersetup and bitbake: check host prerequisites, pick the lay... |
 | `ti-linux-yocto-custom-dt` | Carry a custom device tree or overlay from the Processor SDK kernel tree into a Yocto (Arago/oe-layersetup) image build of the same SDK. Use after the DTS wo... |
 
-Bundles:
-
-- `ti-linux-sdk-skills-bringup`: First boot: SDK setup, build, flash, serial console, boot chain (ti-linux-sdk-quick-start, ti-linux-sdk-setup, ti-linux-build-source, ti-linux-deploy-image, ti-linux-serial-console, ti-linux-boot-chain, ti-linux-diagnostic)
-- `ti-linux-sdk-skills-kernel-dt`: Kernel modules and device tree work (ti-linux-kernel-module, ti-linux-device-tree-overlay, ti-linux-gpio-pinmux, ti-linux-customize-clocks, ti-linux-custom-board-port)
-- `ti-linux-sdk-skills-yocto`: Yocto builds and device tree in Yocto (ti-linux-yocto-build, ti-linux-yocto-custom-dt)
-- `ti-linux-sdk-skills-remote-cores`: Remote processors, PRU and K3 resource partitioning (ti-linux-remoteproc, ti-linux-pru, ti-linux-resource-partition)
-
-## MCU+ SDK
-
-`ti-mcu-plus-sdk-skills` - status: planned - license: BSD-3-Clause
-
-Skills for the TI MCU+ SDK on Sitara MCUs and Jacinto/AM6x real-time cores.
-
-_No skills published yet._
-
