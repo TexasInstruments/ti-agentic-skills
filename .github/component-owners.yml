@@ -1,0 +1,9 @@
+---
+# Per-component owners, assigned as reviewers by .github/workflows/component-owners.yml.
+# Key: a path prefix (applies recursively). Value: a list of GitHub usernames.
+# Add your area below in a PR. Keep entries sorted by path.
+components:
+  skills/ti-linux-sdk-skills/ti-linux-yocto-build:
+    - jeevantelukula
+  skills/ti-linux-sdk-skills/ti-linux-yocto-custom-dt:
+    - jeevantelukula

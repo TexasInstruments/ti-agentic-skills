@@ -1,8 +1,10 @@
 # ti-agentic-skills
 
-Agent Skills for Texas Instruments products and software. Install them into a coding agent
-(Claude Code, Codex, Cursor and others that support the [Agent Skills](https://agentskills.io)
-format; the plugin marketplace manifest is Claude Code only for now) to run TI-specific workflows: SDK setup, builds, bring-up, debug and deployment.
+Agent Skills for Texas Instruments products and software. Install them into a coding agent to
+run TI-specific workflows: SDK setup, builds, bring-up, debug and deployment.
+
+Works with agents that support the [Agent Skills](https://agentskills.io) format (Claude Code,
+Codex, Cursor and others). The plugin marketplace manifest is Claude Code only for now.
 
 One repository for all of TI. Each business unit owns a group folder under `skills/`.
 
@@ -52,7 +54,8 @@ shared/<group>/                   sources of files vendored into several skills
 registry/<group>.yml              group metadata, owners, bundles, shared-file map
 mcp/<server>/                     MCP servers the skills call (Linux skills use mcp/processor-sdk-docs)
 tools/                            validate, build, sync_shared, install
-docs/                             spec, install, governance helpers
+docs/                             skill spec, install guide, onboarding, trust rules, generated catalog
+template/skill-template/          starting point for a new skill
 ```
 
 ## Add a business unit or a skill
@@ -69,4 +72,4 @@ and review a skill before installing it. Report issues per [SECURITY.md](SECURIT
 BSD-3-Clause. See [LICENSE](LICENSE).
 
 TODO(legal): confirm the license choice and copyright wording with TI legal before the first public release.
-TODO(admin): create the GitHub teams named in `.github/CODEOWNERS`.
+Owners: repo-wide reviewers are in `.github/CODEOWNERS`; per-area owners go in `.github/component-owners.yml`.

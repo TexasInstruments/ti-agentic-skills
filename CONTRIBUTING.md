@@ -7,8 +7,8 @@
    python3 tools/sync_shared.py && python3 tools/build.py && python3 tools/validate.py
    ```
 4. Sign off every commit (Developer Certificate of Origin, https://developercertificate.org): `git commit -s`.
-5. Open a PR. CODEOWNERS routes review to your group's maintainers; changes to `tools/`, `.github/`
-   and `registry/_template.yml` go to the repo maintainers.
+5. Open a PR. Repo-wide reviewers come from CODEOWNERS; component owners for the paths you touch are
+   requested automatically (`.github/component-owners.yml`). Add yourself for the area you maintain.
 
 Rules that CI enforces: name equals directory and carries the group prefix, description at most
 1024 characters, SKILL.md at most 500 lines, no link or script path leaving the skill folder, no

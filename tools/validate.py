@@ -5,7 +5,7 @@
 
 Checks:
   * every registry parses and has required keys
-  * every skills/<group>/ has a registry, and every registry group has CODEOWNERS
+  * every skills/<group>/ has a registry; .github/component-owners.yml is valid and its paths exist
   * skill: frontmatter, name == directory, name carries the group prefix,
     description <= 1024 chars, SKILL.md <= 500 lines, names unique repo-wide
   * bundles reference existing skills
@@ -16,7 +16,7 @@ import os
 import re
 import sys
 
-from common import (NAME_RE, ROOT, SKILLS_DIR, parse_frontmatter, registries,
+from common import (NAME_RE, load_yaml, ROOT, SKILLS_DIR, parse_frontmatter, registries,
                     skills_in_group)
 
 errors = []
@@ -26,7 +26,7 @@ def err(msg):
     errors.append(msg)
 
 
-REQUIRED_REG = ("name", "group", "description", "owners", "status", "license")
+REQUIRED_REG = ("name", "group", "description", "status", "license")
 STATUSES = ("planned", "active", "deprecated")
 LINK_RE = re.compile(r"\]\(([^)\s#]+)")
 ESCAPE_RE = re.compile(r"(\.\./)+[\w.-]")
@@ -88,17 +88,37 @@ def check_skill(group, skill, seen):
                             (os.path.relpath(p, ROOT), i))
 
 
+def check_component_owners():
+    """.github/component-owners.yml: valid shape, every path exists, owners are usernames.
+
+    Returns the set of component paths."""
+    p = os.path.join(ROOT, ".github", "component-owners.yml")
+    rel = ".github/component-owners.yml"
+    if not os.path.isfile(p):
+        return err("%s missing" % rel) or set()
+    comps = (load_yaml(p) or {}).get("components")
+    if not isinstance(comps, dict) or not comps:
+        return err("%s: 'components' must be a non-empty mapping" % rel) or set()
+    for path, owners in comps.items():
+        if "*" not in path and not os.path.exists(os.path.join(ROOT, path)):
+            err("%s: path %r does not exist" % (rel, path))
+        if not isinstance(owners, list) or not owners:
+            err("%s: %r needs a list of owners" % (rel, path))
+            continue
+        for o in owners:
+            if not isinstance(o, str) or o.startswith("@") or not re.match(r"^[A-Za-z0-9][A-Za-z0-9/_-]*$", o):
+                err("%s: owner %r must be a GitHub username without '@'" % (rel, o))
+    return set(comps)
+
+
 def main():
     regs = registries()
     if not regs:
         err("registry/: no group registries found")
     seen = {}
-    codeowners = ""
-    co = os.path.join(ROOT, ".github", "CODEOWNERS")
-    if os.path.isfile(co):
-        codeowners = open(co, encoding="utf-8").read()
-    else:
+    if not os.path.isfile(os.path.join(ROOT, ".github", "CODEOWNERS")):
         err(".github/CODEOWNERS missing")
+    owned = check_component_owners()
 
     for group, reg in regs.items():
         f = "registry/" + reg["_file"]
@@ -109,9 +129,10 @@ def main():
             err("%s: status must be one of %s" % (f, STATUSES))
         if not group.startswith("ti-") or not group.endswith("-skills"):
             err("%s: group must look like ti-<area>-skills" % f)
-        if "skills/%s/" % group not in codeowners:
-            err(".github/CODEOWNERS: no entry for skills/%s/" % group)
         skills = skills_in_group(group)
+        if reg.get("status") == "active" and not any(p.startswith("skills/%s" % group) for p in owned):
+            print("validate: warning: %s is active but has no entry in .github/component-owners.yml" % group,
+                  file=sys.stderr)
         if reg.get("status") == "active" and not skills:
             err("%s: status active but skills/%s/ has no skills" % (f, group))
         for s in skills:

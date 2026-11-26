@@ -1,0 +1,24 @@
+---
+name: component-owners
+# pull_request_target is safe here: the job reads only the base-branch config
+# and never checks out or runs code from the PR.
+on: [pull_request_target]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  component-owners:
+    name: Assign component owners
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write  # required to request reviewers
+    steps:
+      - name: Assign component owners
+        uses: dyladan/component-owners@7ff2b343629407c4dbe1c28ae66f55f723543d2b  # v0.2.0
+        with:
+          config-file: .github/component-owners.yml
+          repo-token: ${{ github.token }}
+          assign-owners: true
+          request-owner-reviews: true
