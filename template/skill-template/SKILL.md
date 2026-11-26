@@ -4,9 +4,6 @@ description: >
   One to three sentences. Say what the skill does AND when to use it, with the phrases a user
   would actually type. Max 1024 characters.
 license: BSD-3-Clause
-metadata:
-  category: ti-example-skills
-  version: "0.1.0"
 ---
 
 # Title

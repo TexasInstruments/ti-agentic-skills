@@ -6,6 +6,7 @@ description: >-
   debugfs, decode pad values, and test lines from user space with libgpiod v2.
   Use when a pin needs a different function/pull/direction, a peripheral does
   not get its pins, a pin conflict is suspected, or a GPIO must be read or driven.
+license: BSD-3-Clause
 ---
 
 # TI GPIO and pinmux
@@ -114,7 +115,7 @@ Chip numbering is assigned at probe and the SoC GPIO chips are labelled by contr
 `gpioinfo` lists the line name and direction for each offset (names come from DTS `line-name`/`gpio-line-names`).
 
 ## Verify
-1. `dtc` accepts the DTS/DTSO (`ti-linux-device-tree-overlay/scripts/build-dtbo.sh`).
+1. `dtc` accepts the DTS/DTSO (`scripts/build-dtbo.sh`).
 2. After boot: `pinmux-pins` shows your device as owner of the pad and `pins` decodes to the intended macro.
 3. `gpioinfo` shows the line (and `gpio-hog` name if used); `gpioget` / `gpiomon` behave as wired.
 

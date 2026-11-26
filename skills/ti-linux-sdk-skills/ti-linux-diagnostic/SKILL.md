@@ -1,6 +1,7 @@
 ---
 name: ti-linux-diagnostic
 description: Read-only health snapshot of a running TI K3 board (identity, kernel, memory, thermal, cpufreq, remoteproc, disks, failed units, dmesg errors) as JSON. Use to validate a deployment or to start debugging a board.
+license: BSD-3-Clause
 ---
 
 # ti-linux-diagnostic

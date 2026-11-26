@@ -18,8 +18,8 @@ skills/<category>/<skill>/
 |---|---|
 | `name` | required, equals the directory, lowercase letters, digits, hyphens, max 64, starts with the category prefix (`ti-<sdk>-`) |
 | `description` | required, max 1024 chars; say what it does and when to use it |
-| `license` | `BSD-3-Clause` |
-| `metadata` | string-to-string map; use `category` and `version` |
+| `license` | required, equals the category's `license` in its registry file (`BSD-3-Clause`) |
+| `metadata` | optional string-to-string map |
 
 Body: at most 500 lines. Put long material in `references/`.
 

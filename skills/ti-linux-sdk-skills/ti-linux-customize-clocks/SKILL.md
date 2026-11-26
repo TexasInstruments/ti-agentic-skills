@@ -1,6 +1,7 @@
 ---
 name: ti-linux-customize-clocks
 description: Inspect and change CPU frequency scaling (cpufreq sysfs, governors, the A53 OPP table in the kernel DTS) and set LPM resume-latency constraints (pm_qos_resume_latency_us) on a K3 Processor SDK Linux target. Use when the user asks about CPU frequency, governors, OPPs, disabling or limiting an OPP, DVFS, or which low power mode the SoC enters.
+license: BSD-3-Clause
 ---
 
 # CPU frequency, OPPs and LPM constraints

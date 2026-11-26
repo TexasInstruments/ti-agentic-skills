@@ -1,6 +1,7 @@
 ---
 name: ti-linux-serial-console
 description: Access the target board's serial console to capture boot logs (ROM, SPL, U-Boot, kernel) and interact with the bootloader. Use when the board has no network, when debugging early boot failures, or when you need to interrupt U-Boot.
+license: BSD-3-Clause
 ---
 
 # ti-linux-serial-console

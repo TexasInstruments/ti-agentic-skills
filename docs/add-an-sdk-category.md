@@ -3,7 +3,7 @@
 A category holds the skills for one SDK or software stack. Linux SDK is the first one
 (`ti-linux-sdk-skills`). Use the same steps for each new category; no other category's files change.
 
-Naming: the category folder is `ti-<sdk>-skills`, every skill in it is `ti-<sdk>-<topic>`.
+Naming: the category folder is `ti-<sdk>-sdk-skills`, every skill in it is `ti-<sdk>-<topic>`.
 Example for an SDK called `foo`: folder `ti-foo-sdk-skills`, skills `ti-foo-build`, `ti-foo-flash`.
 
 ## Steps

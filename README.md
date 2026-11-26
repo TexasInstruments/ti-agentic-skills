@@ -10,7 +10,7 @@ One repository for all TI SDKs. Each SDK has its own category folder under `skil
 
 | Category | Folder | Status |
 |---|---|---|
-| Linux SDK (Sitara MPU) | `skills/ti-linux-sdk-skills/` | active (18 skills) |
+| Linux SDK (Sitara MPU) | `skills/ti-linux-sdk-skills/` | active |
 
 The generated [catalog](docs/CATALOG.md) lists every skill.
 
@@ -50,13 +50,13 @@ See [docs/install.md](docs/install.md) for all install routes.
 ## Repository layout
 
 ```
-skills/<category>/<skill>/SKILL.md   the skills (self-contained: scripts/, references/, assets/)
-shared/<category>/                   sources of files vendored into several skills
-registry/<category>.yml              category metadata, status, shared-file map
-mcp/<server>/                     MCP servers the skills call (Linux skills use mcp/processor-sdk-docs)
-tools/                            validate, build, sync_shared, install
-docs/                             skill spec, install guide, onboarding, trust rules, generated catalog
-template/skill-template/          starting point for a new skill
+skills/<category>/<skill>/SKILL.md  the skills (self-contained: scripts/, references/, assets/)
+shared/<category>/                  sources of files vendored into several skills
+registry/<category>.yml             category metadata, status, shared-file map
+mcp/<server>/                       MCP servers the skills call (Linux: mcp/processor-sdk-docs)
+tools/                              validate, build, sync_shared, install
+docs/                               skill spec, install guide, onboarding, trust rules, catalog
+template/skill-template/            starting point for a new skill
 ```
 
 ## Add a skill or an SDK category

@@ -1,6 +1,7 @@
 ---
 name: ti-linux-build-source
 description: Build the Linux kernel, device tree blobs, and U-Boot boot binaries (R5/A-core or single-stage, depending on the SoC) from the SDK sources using the SDK top-level Makefile and Rules.make, locate the outputs, rebuild incrementally, and change kernel config. Use when the user wants to compile the kernel, DTBs or bootloaders from the SDK tree. For the Yocto/bitbake path use ti-linux-yocto-build instead.
+license: BSD-3-Clause
 ---
 
 # Build kernel, DTBs and U-Boot from the SDK

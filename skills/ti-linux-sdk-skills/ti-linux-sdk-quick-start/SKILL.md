@@ -1,6 +1,7 @@
 ---
 name: ti-linux-sdk-quick-start
 description: Entry point and router for TI Processor SDK Linux work. Gathers the few inputs every other skill needs (SDK path, board IP, boot medium, security mode) and sends the user through Setup, Customize, Build, Deploy, Validate by naming the skill for each phase. Use at the start of a session, or when the user says "get started", "set up my board", or is unsure which skill applies.
+license: BSD-3-Clause
 ---
 
 # TI SDK quick start (router)
@@ -78,7 +79,7 @@ toolchain are NOT stored, they are read from the SDK):
 
 Run phases in order the first time: Setup, Customize, Build, Deploy, Validate. Customize is
 optional; Build and Deploy repeat after each change. Pick the Build skill by path: SDK sources
-(`ti-linux-build-source`) or Yocto (`ti-linux-yocto-build`). If a skill listed here is missing from `skills/`,
+(`ti-linux-build-source`) or Yocto (`ti-linux-yocto-build`). If a skill listed here is not installed,
 say so instead of improvising.
 
 ## Steps
@@ -94,12 +95,12 @@ say so instead of improvising.
 ## Verify
 
 - `echo "$TI_SOC $TI_SDK_VERSION $TI_DOCS_DEVICE"` is non-empty after `ti-linux-sdk-setup`, and `[ -f "$TI_KB" ]`.
-- Each phase hand-off names a skill from the table; if a skill listed there is not installed in
-  `skills/`, tell the user rather than improvising its steps.
+- Each phase hand-off names a skill from the table; if a skill listed there is not installed,
+  tell the user rather than improvising its steps.
 
 ## Troubleshooting
 
 - No SDK yet: start with step 1 of `ti-linux-sdk-setup` (installer).
 - MCP not reachable: say so; continue from the SDK on disk (Rules.make, Makefile, kernel DTS).
-- Unsure which skill fits: read the `description` line of each `skills/*/SKILL.md`.
+- Unsure which skill fits: read the `description` line of each installed skill's `SKILL.md`.
 - Board misbehaves after Deploy: `ti-linux-diagnostic`; no boot output at all: `ti-linux-boot-chain`.

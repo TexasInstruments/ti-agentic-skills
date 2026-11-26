@@ -6,6 +6,7 @@ description: >
   and /sys/class/remoteproc, never from memory. Use when asked to run firmware on a secondary core,
   swap an IPC example, read a core's trace log, check rpmsg devices, or find out which cores exist
   and which one Linux may load. PRU cores are covered by ti-linux-pru.
+license: BSD-3-Clause
 ---
 
 # ti-linux-remoteproc

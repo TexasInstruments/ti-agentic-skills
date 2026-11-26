@@ -6,6 +6,7 @@ description: >-
   `make linux-dtbs` flow and the user wants it in a bitbake-built image; also to find which
   kernel recipe, machine config and DTB list the Yocto build uses. Unverified Yocto details are
   marked "check docs" instead of guessed.
+license: BSD-3-Clause
 ---
 
 # TI custom device tree in a Yocto build

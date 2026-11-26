@@ -1,9 +1,9 @@
 # Copy to registry/<category>.yml. One file per skill category (one SDK or software stack).
-name: Human Readable Category Name          # shown in the catalog
-category: ti-example-skills                 # must equal the file name and the skills/<category>/ folder
+name: Human Readable Category Name       # shown in the catalog
+category: ti-example-sdk-skills          # must equal the file name and the skills/<category>/ folder
 description: >
   One or two sentences: what these skills do and which products they cover.
-status: planned                          # planned | active | deprecated
+status: planned                         # planned | active | deprecated
 # Owners are not listed here: add your paths and GitHub usernames to .github/component-owners.yml.
 license: BSD-3-Clause
 # Optional: files vendored from shared/<category>/ into individual skills by tools/sync_shared.py.

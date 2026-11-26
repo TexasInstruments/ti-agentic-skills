@@ -370,7 +370,7 @@ def _catalog_from_local_root(root: Path) -> list[dict[str, str]]:
 # HTTP docs root -- nightly build HTTP access (autoindex mode)
 #
 # Set TI_PROCESSOR_SDK_DOCS_HTTP_ROOT to the HTTP-served nightly build root, e.g.:
-#   http://swubn04.india.englab.ti.com/smpusdk-docs-build
+#   http://<host>/smpusdk-docs-build
 #
 # Structure (same as local root, served via HTTP with autoindex enabled):
 #   {root}/{device}-evm/{build_id}_{date}/processor-sdk-{os}-docs/

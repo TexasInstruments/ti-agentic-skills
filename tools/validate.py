@@ -6,7 +6,7 @@
 Checks:
   * every registry parses and has required keys
   * every skills/<category>/ has a registry; .github/component-owners.yml is valid and its paths exist
-  * skill: frontmatter, name == directory, name carries the category prefix,
+  * skill: frontmatter, name == directory, name carries the category prefix, license matches registry,
     description <= 1024 chars, SKILL.md <= 500 lines, names unique repo-wide
   * no markdown link or script path escapes the skill folder (self-contained rule)
   * registry `shared` maps point at real files (content drift: tools/sync_shared.py --check)
@@ -31,7 +31,7 @@ LINK_RE = re.compile(r"\]\(([^)\s#]+)")
 ESCAPE_RE = re.compile(r"(\.\./)+[\w.-]")
 
 
-def check_skill(category, skill, seen):
+def check_skill(category, skill, seen, license_):
     sdir = os.path.join(SKILLS_DIR, category, skill)
     path = os.path.join(sdir, "SKILL.md")
     rel = os.path.relpath(path, ROOT)
@@ -52,6 +52,8 @@ def check_skill(category, skill, seen):
         err("%s: description missing" % rel)
     elif len(desc) > 1024:
         err("%s: description is %d chars (max 1024)" % (rel, len(desc)))
+    if fm.get("license") != license_:
+        err("%s: license must be %r (the category's license)" % (rel, license_))
     meta = fm.get("metadata")
     if meta is not None and (not isinstance(meta, dict) or
                              any(not isinstance(k, str) or not isinstance(v, str)
@@ -135,7 +137,7 @@ def main():
         if reg.get("status") == "active" and not skills:
             err("%s: status active but skills/%s/ has no skills" % (f, category))
         for s in skills:
-            check_skill(category, s, seen)
+            check_skill(category, s, seen, reg.get("license"))
         for skill, items in (reg.get("shared") or {}).items():
             if skill not in skills:
                 err("%s: shared lists unknown skill %r" % (f, skill))

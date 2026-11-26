@@ -1,6 +1,7 @@
 ---
 name: ti-linux-resource-partition
 description: Locate and understand the K3 Resource Partitioning tool shipped in the SDK (board-support/k3-respart-tool, SysConfig based) and its generated outputs (.syscfg, *_qos.h) used for DMA/ring/interrupt allocation and QoS. Use when the user asks about resource partitioning, DMA channel or ring allocation between cores, QoS settings, or regenerating the firmware resource configuration.
+license: BSD-3-Clause
 ---
 
 # K3 resource partitioning

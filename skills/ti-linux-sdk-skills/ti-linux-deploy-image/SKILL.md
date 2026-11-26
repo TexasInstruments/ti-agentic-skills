@@ -1,6 +1,7 @@
 ---
 name: ti-linux-deploy-image
 description: Put built or prebuilt SDK images on a TI board - create an SD card with the SDK bin/create-sdcard.sh or the Makefile install targets (DESTDIR), copy boot files, flash boot binaries and rootfs to eMMC, set up TFTP/NFS network boot with the SDK helper scripts, and persist U-Boot variables with uEnv.txt. Use after ti-linux-build-source, or when the user asks to flash, write an SD card, boot from eMMC, or boot over the network.
+license: BSD-3-Clause
 ---
 
 # Deploy images to the board

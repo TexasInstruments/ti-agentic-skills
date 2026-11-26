@@ -6,6 +6,7 @@ description: >
   a GP, HS-FS or HS-SE device. Use when a board does not reach U-Boot, when boot files must be rebuilt or
   copied to an SD/eMMC boot partition, or when asked how the K3 boot flow works. Older Sitara parts
   (MLO + u-boot.img) are detected and reported as a different flow.
+license: BSD-3-Clause
 ---
 
 # ti-linux-boot-chain

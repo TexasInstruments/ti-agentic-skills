@@ -1,6 +1,7 @@
 ---
 name: ti-linux-generate-kb
 description: Generate or refresh the per-platform knowledge base (cores and firmware names, reserved memory, OPPs, IOPAD macros, GPIO, overlays, boot files, component versions) from the installed TI Processor SDK sources. Use after installing the skills, when the SDK or kernel changed, when $TI_KB is missing or stale, or when a skill needs device facts.
+license: BSD-3-Clause
 ---
 
 # Generate the platform knowledge base

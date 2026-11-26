@@ -7,7 +7,7 @@
 # when the file is missing.
 #
 # IMPORTANT: This script never touches the original
-#            processor-sdk-doc-fork repository. It works on a
+#            original SDK documentation build. It works on a
 #            temporary copy of the build directory.
 #
 # Prerequisites:
@@ -16,7 +16,7 @@
 #     as this script (or you can set SERVER_PATH below).
 #   * A local SDK build that contains searchindex.js and (optionally)
 #     searchindex.db – e.g. the output of
-#         scripts/build_searchindex.py <build_dir>
+#         scripts/build_searchindex.py <build_dir> (in the processor-sdk-doc repo)
 #   * curl and (optional) jq for pretty‑printing JSON.
 #
 # Usage:

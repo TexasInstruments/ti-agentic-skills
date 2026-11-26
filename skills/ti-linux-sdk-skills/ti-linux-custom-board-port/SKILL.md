@@ -5,6 +5,7 @@ description: >-
   the U-Boot R5 and A53 device trees and defconfigs, regenerate DDR/board configuration, and
   build and boot it with the SDK makefiles. Use when the user has their own carrier or SoM
   hardware based on a TI K3 SoC and needs boot (tiboot3/tispl/u-boot.img) plus Linux DTB for it.
+license: BSD-3-Clause
 ---
 
 # TI custom board port

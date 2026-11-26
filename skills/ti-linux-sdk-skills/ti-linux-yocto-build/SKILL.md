@@ -6,6 +6,7 @@ description: >
   tisdk-default-image and related targets, rebuild one recipe, and find the output images. Use when the
   user wants a full SDK image from source, an RT or Jailhouse image, a single recipe rebuild, or hits a
   Yocto build setup problem. Customising the device tree inside Yocto is ti-linux-yocto-custom-dt.
+license: BSD-3-Clause
 ---
 
 # ti-linux-yocto-build

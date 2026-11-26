@@ -1,6 +1,7 @@
 ---
 name: ti-linux-sdk-setup
 description: Install or locate a TI Processor SDK Linux tree, check the build host, load device values (SOC, PLATFORM, toolchain, U-Boot machines) from the SDK Rules.make into the shell, and confirm the docs MCP works. Use first in any session, when the user mentions installing the SDK, SDK path, toolchain, Rules.make, host requirements, or before ti-linux-build-source / ti-linux-deploy-image.
+license: BSD-3-Clause
 ---
 
 # SDK setup and environment

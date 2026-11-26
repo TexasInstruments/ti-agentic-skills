@@ -5,6 +5,7 @@ description: >
   board from Linux: gate on PRU presence in the device tree, build an SDK example with the PRU compiler,
   load it through remoteproc, and talk to it over RPMsg. Use when the user mentions PRU, PRU-ICSS, ICSSG,
   RTU, TX_PRU or real-time I/O firmware. Some SoCs (for example AM62P) have no PRU: the skill stops there.
+license: BSD-3-Clause
 ---
 
 # ti-linux-pru

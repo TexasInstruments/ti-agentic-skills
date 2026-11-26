@@ -6,6 +6,7 @@ description: >-
   to the board's base DTB on the host, copy it to the SD card and enable it from U-Boot
   with name_overlays in uEnv.txt. Use when enabling a daughter card, panel, camera,
   CAN/PWM/eQEP option or extra pinmux without rebuilding the base board DTB.
+license: BSD-3-Clause
 ---
 
 # TI device tree overlay

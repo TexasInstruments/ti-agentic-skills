@@ -10,9 +10,9 @@ usage() {
 Usage: tools/install.sh [--category <category>] [--skill <name>]... [--dest <dir>] [--list]
 
   --category <category>  install every skill in skills/<category>/
-  --skill <name>   install one skill (repeatable; may be combined with --category)
-  --dest <dir>     target skills directory (default: ./.claude/skills)
-  --list           list available categories and skills, then exit
+  --skill <name>         install one skill (repeatable; may be combined with --category)
+  --dest <dir>           target skills directory (default: ./.claude/skills)
+  --list                 list available categories and skills, then exit
 
 Each skill is self-contained, so any selection installs cleanly.
 USAGE

@@ -5,6 +5,7 @@ description: >
   check that it matches the kernel running on the board, and load it. Use when the user wants to build,
   rebuild or deploy a custom driver (.ko), asks why insmod says "Invalid module format", or asks how to
   build modules for the SDK kernel. Uses the toolchain and architecture from the SDK Rules.make.
+license: BSD-3-Clause
 ---
 
 # ti-linux-kernel-module

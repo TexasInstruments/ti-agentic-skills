@@ -23,6 +23,7 @@ shared:
   ti-linux-deploy-image:
     - {src: mcp-usage.md, dest: references/mcp-usage.md}
     - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: target-profile.yaml, dest: assets/target-profile.yaml}
   ti-linux-device-tree-overlay:
     - {src: mcp-usage.md, dest: references/mcp-usage.md}
     - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
@@ -36,6 +37,7 @@ shared:
   ti-linux-gpio-pinmux:
     - {src: mcp-usage.md, dest: references/mcp-usage.md}
     - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}
+    - {src: build-dtbo.sh, dest: scripts/build-dtbo.sh}
   ti-linux-kernel-module:
     - {src: mcp-usage.md, dest: references/mcp-usage.md}
     - {src: ti-sdk-env.sh, dest: scripts/ti-sdk-env.sh}

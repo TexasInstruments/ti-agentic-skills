@@ -814,7 +814,7 @@ def render_md(doc, name):
     w = L.append
     w("# Target platform facts: %s" % name)
     w("")
-    w("> GENERATED FILE - do not edit; regenerate with `python3 lib/gen-sdk-facts.py` (skill `ti-generate-kb`).")
+    w("> GENERATED FILE - do not edit; regenerate with `python3 scripts/gen-sdk-facts.py` (skill `ti-linux-generate-kb`).")
     w("")
     w("- Generated: %s" % m["generated"])
     w("- Generator: %s" % m["generator"])
