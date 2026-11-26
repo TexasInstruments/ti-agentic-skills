@@ -3,8 +3,6 @@ group: ti-linux-sdk-skills
 description: >
   Skills for the TI Processor SDK Linux on Sitara MPUs: SDK setup, kernel and U-Boot builds,
   Yocto, device tree, boot flow, deployment and diagnostics.
-owners:
-  - "@TexasInstruments/ti-linux-sdk-skills-maintainers"
 status: active
 license: BSD-3-Clause
 bundles:

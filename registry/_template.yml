@@ -3,9 +3,8 @@ name: Human Readable Group Name          # shown in the catalog
 group: ti-example-skills                 # must equal the file name and the skills/<group>/ folder
 description: >
   One or two sentences: what these skills do and which products they cover.
-owners:                                  # GitHub teams; must also appear in .github/CODEOWNERS
-  - "@TexasInstruments/ti-example-skills-maintainers"
 status: planned                          # planned | active | deprecated
+# Owners are not listed here: add your paths and GitHub usernames to .github/component-owners.yml.
 license: BSD-3-Clause
 # Optional: named subsets users can install as one Claude plugin.
 bundles:

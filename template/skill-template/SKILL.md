@@ -6,7 +6,6 @@ description: >
 license: BSD-3-Clause
 metadata:
   group: ti-example-skills
-  owner: "@TexasInstruments/ti-example-skills-maintainers"
   version: "0.1.0"
 ---
 
