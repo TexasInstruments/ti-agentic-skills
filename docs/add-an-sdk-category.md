@@ -29,3 +29,5 @@ Example for an SDK called `foo`: folder `ti-foo-sdk-skills`, skills `ti-foo-buil
 - Skills are self-contained and can be installed alone.
 - Every category is one Claude plugin, generated from its folder. Do not hand-edit generated files.
 - A category with no skills is not published.
+- Releases are per category (`<category>/vX.Y.Z`). Renaming or removing a skill is a breaking change: bump MAJOR.
+- A category with no active owner for 6 months is marked `status: deprecated` in its registry.
