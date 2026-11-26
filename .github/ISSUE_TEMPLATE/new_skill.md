@@ -1,8 +1,8 @@
 ---
-name: Propose a skill or group
-about: Suggest a new skill, or a new business-unit group
+name: Propose a skill or category
+about: Suggest a new skill, or a new SDK category
 ---
 
-**Group (existing or new):**
+**Category (existing or new):**
 **Problem the skill solves:**
 **Who would maintain it:**

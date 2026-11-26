@@ -6,11 +6,12 @@
 | One skill | `npx skills add TexasInstruments/ti-agentic-skills --skill <name> -a claude-code` |
 | Selected skills | repeat `--skill` |
 | Global instead of project | add `-g` |
-| Offline, whole group | `tools/install.sh --group <group>` |
+| Offline, whole category | `tools/install.sh --category <category>` |
 | Offline, one skill | `tools/install.sh --skill <name>` |
+| Claude Code, whole category | `/plugin install ti-linux-sdk-skills --marketplace TexasInstruments/ti-agentic-skills` |
 
 Skills are copied into the agent's skills directory (for Claude Code, `./.claude/skills/<name>`).
 
-Tested: `skills/<group>/<skill>` discovery, `--list`, and `--skill` selection with the `skills` CLI.
-Not yet tested: Claude Code plugin marketplace install of a group plugin, and wildcard `--skill` patterns.
+Tested: `--list` and `--skill` with the `skills` CLI; Claude Code marketplace add and install of a category plugin
+(`claude plugin validate .` passes). Not tested: wildcard `--skill` patterns.
 Because every skill is self-contained, a partial install never breaks.

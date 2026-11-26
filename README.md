@@ -6,18 +6,17 @@ run TI-specific workflows: SDK setup, builds, bring-up, debug and deployment.
 Works with agents that support the [Agent Skills](https://agentskills.io) format (Claude Code,
 Codex, Cursor and others). The plugin marketplace manifest is Claude Code only for now.
 
-One repository for all of TI. Each business unit owns a group folder under `skills/`.
+One repository for all TI SDKs. Each SDK has its own category folder under `skills/`.
 
-| Group | Folder | Status |
+| Category | Folder | Status |
 |---|---|---|
 | Linux SDK (Sitara MPU) | `skills/ti-linux-sdk-skills/` | active (18 skills) |
-| MCU+ SDK | `skills/ti-mcu-plus-sdk-skills/` | planned |
 
 The generated [catalog](docs/CATALOG.md) lists every skill.
 
 ## Install
 
-Every skill is self-contained, so you can install one skill, one group, or a mix.
+Every skill is self-contained, so you can install one skill, one category, or a mix.
 
 ```bash
 # See what is available
@@ -34,33 +33,35 @@ Offline, from a checkout:
 
 ```bash
 tools/install.sh --list
-tools/install.sh --group ti-linux-sdk-skills            # whole group -> ./.claude/skills
+tools/install.sh --category ti-linux-sdk-skills            # whole category -> ./.claude/skills
 tools/install.sh --skill ti-linux-<skill> --dest ~/.claude/skills
 ```
 
 Claude Code plugin marketplace: the repo ships `.claude-plugin/marketplace.json` with one plugin
-per group and one per bundle. Add it with `/plugin marketplace add TexasInstruments/ti-agentic-skills`,
-then `/plugin install <group>@ti-agentic-skills`.
+per category.
 
-Verification status: `skills/<group>/<skill>` discovery and `--skill` selection with `npx skills`
-were tested. The plugin marketplace route and wildcard selection are not yet tested.
-See [docs/install.md](docs/install.md).
+```
+/plugin marketplace add TexasInstruments/ti-agentic-skills
+/plugin install ti-linux-sdk-skills --marketplace TexasInstruments/ti-agentic-skills
+```
+
+See [docs/install.md](docs/install.md) for all install routes.
 
 ## Repository layout
 
 ```
-skills/<group>/<skill>/SKILL.md   the skills (self-contained: scripts/, references/, assets/)
-shared/<group>/                   sources of files vendored into several skills
-registry/<group>.yml              group metadata, owners, bundles, shared-file map
+skills/<category>/<skill>/SKILL.md   the skills (self-contained: scripts/, references/, assets/)
+shared/<category>/                   sources of files vendored into several skills
+registry/<category>.yml              category metadata, status, shared-file map
 mcp/<server>/                     MCP servers the skills call (Linux skills use mcp/processor-sdk-docs)
 tools/                            validate, build, sync_shared, install
 docs/                             skill spec, install guide, onboarding, trust rules, generated catalog
 template/skill-template/          starting point for a new skill
 ```
 
-## Add a business unit or a skill
+## Add a skill or an SDK category
 
-See [docs/add-a-business-unit.md](docs/add-a-business-unit.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+See [docs/add-an-sdk-category.md](docs/add-an-sdk-category.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Security
 

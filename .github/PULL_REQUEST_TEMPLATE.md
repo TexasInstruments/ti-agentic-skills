@@ -1,6 +1,6 @@
 ## What and why
 
-## Group / skills touched
+## Category / skills touched
 
 ## Checklist
 - [ ] `python3 tools/sync_shared.py && python3 tools/build.py && python3 tools/validate.py` passes

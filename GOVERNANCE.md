@@ -3,11 +3,11 @@
 - Repo maintainers (listed in `.github/CODEOWNERS`, initially `@jeevantelukula`) own structure, tooling, CI,
   the registry schema and releases of the repo itself.
 - Component owners (listed in `.github/component-owners.yml`) are requested as reviewers on PRs that
-  touch their paths: a group, a single skill, `shared/`, `registry/` or an MCP server.
-- A new group is added by a PR that adds `registry/<group>.yml`, owners for its paths in `component-owners.yml`, and the group
-  folder. Repo maintainers approve the structure; the BU owns the content.
-- Releases are per group: tag `<group>/vX.Y.Z`. Breaking changes (renamed or removed skills) bump MAJOR.
-- A group with no active maintainer for 6 months is marked `deprecated` in its registry.
+  touch their paths: a category, a single skill, `shared/`, `registry/` or an MCP server.
+- A new category is added by a PR that adds `registry/<category>.yml`, owners for its paths in `component-owners.yml`, and the category
+  folder. Repo maintainers approve the structure; the owners of the category own the content.
+- Releases are per category: tag `<category>/vX.Y.Z`. Breaking changes (renamed or removed skills) bump MAJOR.
+- A category with no active maintainer for 6 months is marked `deprecated` in its registry.
 
 ## Contact
 
