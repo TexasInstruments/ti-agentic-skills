@@ -20,6 +20,6 @@ ENV TI_PROCESSOR_SDK_MCP_PORT=7471
 EXPOSE 7471
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:7471/mcp', timeout=2)" || exit 1
+  CMD python3 -c "import socket; socket.create_connection(('localhost', 7471), 2).close()" || exit 1
 
 CMD ["python3", "server.py", "--http", "7471"]
