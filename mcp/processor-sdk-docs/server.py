@@ -26,6 +26,7 @@ TI_PROCESSOR_SDK_DEFAULT_DEVICE         default device (default: AM62X)
 TI_PROCESSOR_SDK_DEFAULT_OS             default OS (default: linux)
 TI_PROCESSOR_SDK_DEFAULT_RT             default rt flag (default: false)
 TI_PROCESSOR_SDK_MCP_PORT               HTTP server port (default: 7471)
+TI_PROCESSOR_SDK_MCP_HOST               HTTP bind address (default: 0.0.0.0)
 TI_PROCESSOR_SDK_DOC_CONFIGS            path to processor-sdk-doc configs/ dir
                                         (auto-detected from adjacent repo; falls back to GitHub API)
 TI_PROCESSOR_SDK_CATALOG_TTL            catalog re-fetch interval in seconds (default: 86400)
@@ -78,7 +79,7 @@ from urllib.parse import urlparse, urljoin as _urljoin
 import httpx
 import snowballstemmer as _snowball
 from bs4 import BeautifulSoup, NavigableString, Tag
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 _STEMMER = _snowball.stemmer("english")
 
@@ -1268,8 +1269,9 @@ _DEFAULT_DEVICE = _os.environ.get("TI_PROCESSOR_SDK_DEFAULT_DEVICE", "AM62X")
 _DEFAULT_OS     = _os.environ.get("TI_PROCESSOR_SDK_DEFAULT_OS",     "linux")
 _DEFAULT_RT     = _os.environ.get("TI_PROCESSOR_SDK_DEFAULT_RT",     "").lower() in ("1", "true", "yes")
 _HTTP_PORT      = int(_os.environ.get("TI_PROCESSOR_SDK_MCP_PORT",   "7471"))
+_HTTP_HOST      = _os.environ.get("TI_PROCESSOR_SDK_MCP_HOST",       "0.0.0.0")  # noqa: S104 (container bind)
 
-mcp = FastMCP(
+mcp = MCPServer(
     "ti-processor-sdk-docs",
     instructions=(
         "Search and read TI Processor SDK documentation across all devices and OS types. "
@@ -1280,8 +1282,6 @@ mcp = FastMCP(
         "Use ti_processor_sdk_docs_search to find pages by topic, "
         "ti_processor_sdk_docs_read for full content."
     ),
-    host="0.0.0.0",
-    port=_HTTP_PORT,
 )
 
 
@@ -1810,12 +1810,11 @@ if __name__ == "__main__":
     args = _parse_args()
     if args.http:
         port = args.http
-        mcp.settings.port = port
         logger.info(f"TI Processor SDK Docs MCP -- HTTP mode, port {port}\n")
         logger.info(
             f"Register: claude mcp add --transport http ti-processor-sdk-docs "
             f"http://localhost:{port}/mcp\n"
         )
-        asyncio.run(mcp.run_streamable_http_async())
+        asyncio.run(mcp.run_streamable_http_async(host=_HTTP_HOST, port=port))
     else:
         asyncio.run(mcp.run_stdio_async())

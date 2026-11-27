@@ -103,7 +103,7 @@ Uses the Sphinx HTML build on disk. Fast, no network dependency.
 
 **Install dependencies:**
 ```bash
-pip3 install "mcp>=1.0,<2" beautifulsoup4 httpx uvicorn snowballstemmer
+pip3 install -r requirements.txt
 ```
 
 **Register with Claude Code:**
@@ -355,6 +355,7 @@ ti_processor_sdk_docs_get_asset(
 | `TI_PROCESSOR_SDK_DEFAULT_OS` | `linux` | Default OS for tool parameters |
 | `TI_PROCESSOR_SDK_DEFAULT_RT` | `false` | Default rt flag (`1`/`true`/`yes` to enable) |
 | `TI_PROCESSOR_SDK_MCP_PORT` | `7471` | HTTP server port |
+| `TI_PROCESSOR_SDK_MCP_HOST` | `0.0.0.0` | HTTP bind address (use `127.0.0.1` outside a container) |
 | `TI_PROCESSOR_SDK_DOC_CONFIGS` | (auto) | Path to processor-sdk-doc `configs/` dir. Auto-detected from adjacent repo; falls back to GitHub API |
 | `TI_PROCESSOR_SDK_CATALOG_TTL` | `86400` | Seconds before catalog is re-fetched (24h default) |
 | `TI_PROCESSOR_SDK_OS_PATTERNS` | — | Add or override OS URL patterns without editing server.py. Format: `os:prefix:version_suffix:latest_dir` comma-separated. Example: `rtos:processor-sdk-rtos::latest` |
