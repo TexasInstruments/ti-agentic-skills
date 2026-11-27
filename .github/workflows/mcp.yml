@@ -29,7 +29,9 @@ jobs:
         run: docker build -t processor-sdk-docs mcp/processor-sdk-docs
       - name: Start server
         run: docker run -d --name mcp -p 127.0.0.1:7471:7471 processor-sdk-docs
-      - name: Smoke test (initialize + tools/list)
+      - name: Smoke test (initialize, tools/list, live search and read on software-dl)
+        env:
+          SMOKE_CALL_TOOLS: "1"
         run: mcp/processor-sdk-docs/smoke-test.sh http://127.0.0.1:7471/mcp
       - name: Container is healthy
         run: |

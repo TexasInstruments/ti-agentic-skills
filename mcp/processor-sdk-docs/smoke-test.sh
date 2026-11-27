@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright (c) 2026 Texas Instruments Incorporated
-# Smoke test a running HTTP MCP server: initialize, then list tools.
+# Smoke test a running HTTP MCP server: initialize, list tools, and optionally
+# search for and read the latest AM62X release notes on software-dl.ti.com.
 # Usage: smoke-test.sh [URL]   (default http://127.0.0.1:7471/mcp)
+# Set SMOKE_CALL_TOOLS=1 to also call the tools (needs internet access).
 set -euo pipefail
 
 url="${1:-http://127.0.0.1:7471/mcp}"
@@ -25,4 +27,18 @@ tools=$(curl -sS "${hdr[@]}" -H "mcp-session-id: $sid" \
 for t in ti_processor_sdk_docs_list_variants ti_processor_sdk_docs_search ti_processor_sdk_docs_read; do
     echo "$tools" | grep -q "$t" || { echo "missing tool: $t"; echo "$tools"; exit 1; }
 done
+
+if [ "${SMOKE_CALL_TOOLS:-0}" = 1 ]; then
+    call() {
+        curl -sS --max-time 120 "${hdr[@]}" -H "mcp-session-id: $sid" \
+            -d "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":$1}" "$url"
+    }
+    out=$(call '{"name":"ti_processor_sdk_docs_search","arguments":{"query":"release notes","device":"AM62X","os":"linux","version":"latest","max_results":3}}')
+    page=$(echo "$out" | grep -oE '[A-Za-z0-9_/.-]+\.html' | head -1 || true)
+    [ -n "$page" ] || { echo "search returned no pages:"; echo "$out"; exit 1; }
+    echo "search OK: $page"
+    out=$(call "{\"name\":\"ti_processor_sdk_docs_read\",\"arguments\":{\"path\":\"$page\",\"device\":\"AM62X\",\"os\":\"linux\",\"version\":\"latest\"}}")
+    echo "$out" | grep -q '"isError":false' && echo "$out" | grep -qi 'release' && [ "${#out}" -gt 500 ] || { echo "read failed or too short:"; echo "$out" | head -c 600; exit 1; }
+    echo "read OK"
+fi
 echo "smoke test OK"
