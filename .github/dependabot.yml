@@ -16,6 +16,9 @@ updates:
       interval: monthly
     commit-message:
       prefix: "deps"
+    groups:
+      mcp-python-deps:
+        patterns: ["*"]
   - package-ecosystem: docker
     directory: /mcp/processor-sdk-docs
     schedule:
