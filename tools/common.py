@@ -8,7 +8,7 @@ import sys
 try:
     import yaml
 except ImportError:  # pragma: no cover
-    sys.exit("PyYAML is required: pip install pyyaml")
+    sys.exit("PyYAML is required: pip install -r tools/requirements.txt")
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SKILLS_DIR = os.path.join(ROOT, "skills")

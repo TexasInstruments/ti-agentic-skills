@@ -1,23 +1,39 @@
+---
 name: validate
 on:
   pull_request:
   push:
     branches: [master, main]
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   validate:
+    name: Validate repo
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
         with:
           python-version: "3.11"
-      - run: pip install pyyaml
-      - run: python3 tools/sync_shared.py --check
-      - run: python3 tools/build.py --check
-      - run: python3 tools/validate.py
+          cache: pip
+          cache-dependency-path: tools/requirements.txt
+      - run: pip install -r tools/requirements.txt
+      - name: Shared files in sync
+        run: python3 tools/sync_shared.py --check
+      - name: Generated files up to date
+        run: python3 tools/build.py --check
+      - name: Validate skills and registries
+        run: python3 tools/validate.py
       - name: shellcheck
         run: |
-          sudo apt-get install -y shellcheck
+          sudo apt-get install -y --no-install-recommends shellcheck
           find . -name '*.sh' -not -path './.git/*' -print0 | xargs -0 -r shellcheck -S warning
+      - name: actionlint
+        run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -color

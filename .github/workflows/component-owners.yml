@@ -1,7 +1,7 @@
 ---
 name: component-owners
-# pull_request_target is safe here: the job reads only the base-branch config
-# and never checks out or runs code from the PR.
+# pull_request_target is safe here: the action only calls the GitHub API (it reads the
+# config via the API) and never checks out or runs code from the PR.
 on: [pull_request_target]
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}
@@ -12,6 +12,7 @@ jobs:
   component-owners:
     name: Assign component owners
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: write  # required to request reviewers
     steps:

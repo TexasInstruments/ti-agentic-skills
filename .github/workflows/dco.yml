@@ -1,19 +1,33 @@
+---
 name: dco
 on:
   pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   dco:
+    name: Signed-off-by on every commit
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0
-      - name: Check Signed-off-by on every commit
+          persist-credentials: false
+      - name: Check sign-off
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
           bad=0
-          for c in $(git rev-list --no-merges "origin/${{ github.base_ref }}..HEAD"); do
-            git show -s --format=%B "$c" | grep -qE '^Signed-off-by: .+ <.+>$' || { echo "missing sign-off: $c"; bad=1; }
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git show -s --format=%B "$c" | grep -qE '^Signed-off-by: .+ <.+>$'; then
+              echo "::error::missing Signed-off-by: $(git log -1 --format='%h %s' "$c")"
+              bad=1
+            fi
           done
-          exit $bad
+          [ "$bad" -eq 0 ] || { echo "Fix with: git rebase --signoff origin/${GITHUB_BASE_REF}"; exit 1; }
