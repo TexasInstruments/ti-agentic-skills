@@ -29,6 +29,9 @@ npx skills add TexasInstruments/ti-agentic-skills --skill ti-linux-<skill> -a cl
 npx skills add TexasInstruments/ti-agentic-skills --skill ti-linux-<a> --skill ti-linux-<b> -a claude-code
 ```
 
+Pass `-a claude-code` for Claude Code. Without `-a`, the CLI asks which agents to use, and the default
+selection installs to `.agents/skills`, which Claude Code does not read.
+
 Offline, from a checkout:
 
 ```bash
