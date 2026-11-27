@@ -1,0 +1,47 @@
+---
+name: mcp
+on:
+  pull_request:
+    paths:
+      - "mcp/**"
+      - ".github/workflows/mcp.yml"
+  push:
+    branches: [master, main]
+    paths:
+      - "mcp/**"
+      - ".github/workflows/mcp.yml"
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  docs-server:
+    name: Build and smoke-test processor-sdk-docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build image
+        run: docker build -t processor-sdk-docs mcp/processor-sdk-docs
+      - name: Start server
+        run: docker run -d --name mcp -p 127.0.0.1:7471:7471 processor-sdk-docs
+      - name: Smoke test (initialize + tools/list)
+        run: mcp/processor-sdk-docs/smoke-test.sh http://127.0.0.1:7471/mcp
+      - name: Container is healthy
+        run: |
+          for _ in $(seq 1 20); do
+            s=$(docker inspect -f '{{.State.Health.Status}}' mcp)
+            [ "$s" = healthy ] && exit 0
+            sleep 3
+          done
+          echo "::error::container health is $s"; exit 1
+      - name: Server logs
+        if: failure()
+        run: docker logs mcp
+      - name: Stop server
+        if: always()
+        run: docker rm -f mcp
